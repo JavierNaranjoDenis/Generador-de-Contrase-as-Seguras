@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Contraseñas</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #111827; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; color: white; }
+        .box { background: #1f2937; padding: 30px; border-radius: 12px; width: 320px; text-align: center; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); }
+        .display { background: #374151; padding: 12px; border-radius: 6px; font-size: 18px; font-family: monospace; word-break: break-all; margin-bottom: 15px; border: 1px solid #4b5563; }
+        label { display: block; margin: 10px 0; font-size: 14px; text-align: left; }
+        input[type="range"] { width: 100%; margin-bottom: 15px; }
+        button { background-color: #10b981; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        button:hover { background-color: #059669; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Generador de Claves 🔑</h2>
+    <div class="display" id="passwordOutput">Presiona Generar</div>
+    
+    <label>Longitud: <span id="longitudValor">12</span> caracteres</label>
+    <input type="range" id="longitud" min="6" max="20" value="12" oninput="document.getElementById('longitudValor').innerText = this.value">
+
+    <button onclick="generarPassword()">Generar Contraseña</button>
+</div>
+
+<script>
+    function generarPassword() {
+        const longitud = document.getElementById('longitud').value;
+        const caracteres = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789!@#$%^&*()_+";
+        let password = "";
+        
+        for (let i = 0; i < longitud; i++) {
+            const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+            password += caracteres.charAt(indiceAleatorio);
+        }
+        
+        document.getElementById('passwordOutput').innerText = password;
+    }
+</script>
+</body>
+</html>
